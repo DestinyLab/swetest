@@ -18,7 +18,7 @@ class Swetest
     public function __construct($path = null)
     {
         // default path
-        $path === null and $path = __DIR__.'/../../resources/';
+        $path === null and $path = __DIR__.'/../resources/';
         $this->setPath($path);
     }
 
@@ -29,7 +29,6 @@ class Swetest
      */
     public function setPath($path)
     {
-        $this->path = $path;
         if (is_dir($path) and is_file($path.'swetest')) {
             $this->path = $path;
         } else {
@@ -69,6 +68,7 @@ class Swetest
         }
 
         exec($this->query, $this->output, $this->status);
+        $this->output[0] = str_replace($this->path, '', $this->output[0]);
         $this->hasOutput = true;
 
         return $this;
