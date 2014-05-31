@@ -1,11 +1,16 @@
 <?php
 
+/**
+ * This file is part of DestinyLab.
+ */
+
 namespace DestinyLab;
 
 /**
- * Class Swetest
+ * Swetest
  *
  * @package DestinyLab
+ * @author Lance He <indigofeather@gmail.com>
  */
 class Swetest
 {
@@ -14,6 +19,7 @@ class Swetest
     protected $output = [];
     protected $status = null;
     protected $hasOutput = false;
+    protected $maskPath = true;
 
     public function __construct($path = null)
     {
@@ -68,8 +74,19 @@ class Swetest
         }
 
         exec($this->query, $this->output, $this->status);
-        $this->output[0] = str_replace($this->path, '', $this->output[0]);
+        $this->maskPath and $this->output[0] = str_replace($this->path, '***-***', $this->output[0]);
         $this->hasOutput = true;
+
+        return $this;
+    }
+
+    /**
+     * @param $needMask
+     * @return $this
+     */
+    public function maskPath($needMask)
+    {
+        $this->maskPath = (bool) $needMask;
 
         return $this;
     }

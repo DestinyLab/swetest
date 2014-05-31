@@ -60,6 +60,14 @@ print_r($swetest->getOutput());
 
 ## Configuration
 
+Mask swetest executable path (default to `true`):
+
+```php
+<?php
+
+$swetest->maskPath(true);
+```
+
 Changing the swetest file's path:
 
 ```php
