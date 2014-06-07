@@ -56,6 +56,9 @@ print_r($swetest->getStatus());
 
 // or just get output
 print_r($swetest->getOutput());
+
+// get last query
+print_r($swetest->getLastQuery());
 ```
 
 ## Configuration
@@ -65,7 +68,7 @@ Mask swetest executable path (default to `true`):
 ```php
 <?php
 
-$swetest->maskPath(true);
+$swetest->setMaskPath(true);
 ```
 
 Changing the swetest file's path:

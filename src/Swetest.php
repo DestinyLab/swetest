@@ -75,7 +75,11 @@ class Swetest
         }
 
         exec($this->query, $this->output, $this->status);
-        $this->maskPath and $this->output[0] = str_replace($this->path, '***-***', $this->output[0]);
+        if ($this->maskPath) {
+            $this->maskPath($this->output[0]);
+            $this->maskPath($this->query);
+        }
+
         $this->hasOutput = true;
         $this->lastQuery = $this->query;
 
@@ -83,10 +87,18 @@ class Swetest
     }
 
     /**
+     * @param $path
+     */
+    protected function maskPath(&$path)
+    {
+        $path = str_replace($this->path, '***-***', $path);
+    }
+
+    /**
      * @param $needMask
      * @return $this
      */
-    public function maskPath($needMask)
+    public function setMaskPath($needMask)
     {
         $this->maskPath = (bool) $needMask;
 
