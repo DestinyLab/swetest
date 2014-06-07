@@ -20,6 +20,7 @@ class Swetest
     protected $status = null;
     protected $hasOutput = false;
     protected $maskPath = true;
+    protected $lastQuery = null;
 
     public function __construct($path = null)
     {
@@ -76,6 +77,7 @@ class Swetest
         exec($this->query, $this->output, $this->status);
         $this->maskPath and $this->output[0] = str_replace($this->path, '***-***', $this->output[0]);
         $this->hasOutput = true;
+        $this->lastQuery = $this->query;
 
         return $this;
     }
@@ -121,5 +123,13 @@ class Swetest
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLastQuery()
+    {
+        return $this->lastQuery;
     }
 }
