@@ -74,7 +74,9 @@ class Swetest
             throw new SwetestException('No query!');
         }
 
-        exec($this->query, $this->output, $this->status);
+        exec($this->query, $output, $status);
+        $this->output = $output;
+        $this->status = $status;
         if ($this->maskPath) {
             $this->maskPath($this->output[0]);
             $this->maskPath($this->query);
