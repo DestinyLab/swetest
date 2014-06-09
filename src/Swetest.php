@@ -10,7 +10,7 @@ namespace DestinyLab;
  * Swetest
  *
  * @package DestinyLab
- * @author Lance He <indigofeather@gmail.com>
+ * @author  Lance He <indigofeather@gmail.com>
  */
 class Swetest
 {
@@ -22,11 +22,49 @@ class Swetest
     protected $maskPath = true;
     protected $lastQuery = null;
 
+    /**
+     * @param string $path
+     * @throws SwetestException
+     */
     public function __construct($path = null)
     {
         // default path
         $path === null and $path = __DIR__.'/../resources/';
         $this->setPath($path);
+    }
+
+    /**
+     * @param $query string
+     * @return $this
+     */
+    public function query($query)
+    {
+        is_array($query) and $query = $this->compile($query);
+        $this->query = $this->getPath().'swetest -edir'.$this->getPath().' '.$query;
+
+        return $this;
+    }
+
+    /**
+     * @param $arr
+     * @return string
+     */
+    protected function compile($arr)
+    {
+        $options = [];
+        foreach ($arr as $key => $value) {
+            $options[] = is_int($key) ? '-'.$value : '-'.$key.$value;
+        }
+
+        return implode(' ', $options);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 
     /**
@@ -41,25 +79,6 @@ class Swetest
         } else {
             throw new SwetestException('Invalid path!');
         }
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @param $query string
-     * @return $this
-     */
-    public function query($query)
-    {
-        $this->query = $this->getPath().'swetest -edir'.$this->getPath().' '.$query;
 
         return $this;
     }
@@ -124,19 +143,19 @@ class Swetest
     }
 
     /**
-     * @return array
-     */
-    public function getOutput()
-    {
-        return $this->output;
-    }
-
-    /**
      * @return int
      */
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOutput()
+    {
+        return $this->output;
     }
 
     /**
