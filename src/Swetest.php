@@ -49,7 +49,7 @@ class Swetest
      * @param $arr
      * @return string
      */
-    protected function compile($arr)
+    public function compile($arr)
     {
         $options = [];
         foreach ($arr as $key => $value) {
@@ -144,17 +144,27 @@ class Swetest
 
     /**
      * @return int
+     * @throws SwetestException
      */
     public function getStatus()
     {
+        if ($this->hasOutput === false) {
+            throw new SwetestException('Need `execute()` before call this method!');
+        }
+
         return $this->status;
     }
 
     /**
      * @return array
+     * @throws SwetestException
      */
     public function getOutput()
     {
+        if ($this->hasOutput === false) {
+            throw new SwetestException('Need `execute()` before call this method!');
+        }
+
         return $this->output;
     }
 
