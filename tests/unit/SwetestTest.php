@@ -9,7 +9,7 @@ class SwetestTest extends \Codeception\TestCase\Test
      */
     private $swetest;
 
-    public function _before()
+    protected function _before()
     {
         $this->swetest = new Swetest();
     }
