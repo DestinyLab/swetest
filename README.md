@@ -1,5 +1,7 @@
 # Swetest
 
+[![Build Status](https://travis-ci.org/DestinyLab/swetest.svg?branch=master)](https://travis-ci.org/DestinyLab/swetest)
+
 Swetest is the simple wrapper of swisseph library's swetest.
 
 ## Requirement
