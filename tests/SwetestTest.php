@@ -1,15 +1,16 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use DestinyLab\Swetest;
 
-class SwetestTest extends \Codeception\TestCase\Test
+class SwetestTest extends TestCase
 {
     /**
      * @var DestinyLab\Swetest
      */
     private $swetest;
 
-    protected function _before()
+    protected function setUp()
     {
         $this->swetest = new Swetest();
     }
@@ -21,7 +22,7 @@ class SwetestTest extends \Codeception\TestCase\Test
 
     public function testSetPath()
     {
-        $this->assertInstanceOf("DestinyLab\\Swetest", $this->swetest->setPath(__DIR__.'/../../resources/'));
+        $this->assertInstanceOf("DestinyLab\\Swetest", $this->swetest->setPath(__DIR__.'/../resources/'));
     }
 
     /**
